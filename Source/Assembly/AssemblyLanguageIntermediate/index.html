@@ -1,0 +1,611 @@
+<!-- build time:Mon Jan 09 2023 08:32:32 GMT+0800 (香港标准时间) --><!DOCTYPE html><html lang="zh-Hans"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=2"><meta name="theme-color" content="#FFF"><link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png"><link rel="icon" type="image/ico" sizes="32x32" href="/images/favicon.ico"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="alternate" type="application/rss+xml" title="打爆你滴脑阔" href="https://xiaoliangcoder.github.io/rss.xml"><link rel="alternate" type="application/atom+xml" title="打爆你滴脑阔" href="https://xiaoliangcoder.github.io/atom.xml"><link rel="alternate" type="application/json" title="打爆你滴脑阔" href="https://xiaoliangcoder.github.io/feed.json"><link rel="stylesheet" href="//fonts.googleapis.com/css?family=Mulish:300,300italic,400,400italic,700,700italic%7CFredericka%20the%20Great:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20JP:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20SC:300,300italic,400,400italic,700,700italic%7CInconsolata:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext"><link rel="stylesheet" href="/css/app.css?v=0.2.5"><meta name="keywords" content="Assembly Language"><link rel="canonical" href="https://xiaoliangcoder.github.io/Source/Assembly/AssemblyLanguageIntermediate/"><title>C++反汇编语言 - 进阶 - AssemblyLanguagePrimary - Assembly | Senior Brother = 打爆你滴脑阔 = 笔记</title><meta name="generator" content="Hexo 6.3.0"></head><body itemscope itemtype="http://schema.org/WebPage"><div id="loading"><div class="cat"><div class="body"></div><div class="head"><div class="face"></div></div><div class="foot"><div class="tummy-end"></div><div class="bottom"></div><div class="legs left"></div><div class="legs right"></div></div><div class="paw"><div class="hands left"></div><div class="hands right"></div></div></div></div><div id="container"><header id="header" itemscope itemtype="http://schema.org/WPHeader"><div class="inner"><div id="brand"><div class="pjax"><h1 itemprop="name headline">C++反汇编语言 - 进阶</h1><div class="meta"><span class="item" title="Created: 2022-12-03 14:50:04"><span class="icon"><i class="ic i-calendar"></i> </span><span class="text">Posted on</span> <time itemprop="dateCreated datePublished" datetime="2022-12-03T14:50:04+08:00">2022-12-03</time></span></div></div></div><nav id="nav"><div class="inner"><div class="toggle"><div class="lines" aria-label="Toggle navigation bar"><span class="line"></span> <span class="line"></span> <span class="line"></span></div></div><ul class="menu"><li class="item title"><a href="/" rel="start">Senior Brother</a></li></ul><ul class="right"><li class="item theme"><i class="ic i-sun"></i></li><li class="item search"><i class="ic i-search"></i></li></ul></div></nav></div><div id="imgs" class="pjax"><ul><li class="item" data-background-image="https://api.r10086.com/img-api.php?type=动漫综合3"></li><li class="item" data-background-image="https://api.yimian.xyz/img"></li><li class="item" data-background-image="https://api.ixiaowai.cn/gqapi/gqapi2.php"></li><li class="item" data-background-image="https://api.dujin.org/pic/yuanshen/"></li><li class="item" data-background-image="https://api.likepoems.com/img/aliyun/pc"></li><li class="item" data-background-image="https://api.ixiaowai.cn/api/api2.php"></li></ul></div></header><div id="waves"><svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"/></defs><g class="parallax"><use xlink:href="#gentle-wave" x="48" y="0"/><use xlink:href="#gentle-wave" x="48" y="3"/><use xlink:href="#gentle-wave" x="48" y="5"/><use xlink:href="#gentle-wave" x="48" y="7"/></g></svg></div><main><div class="inner"><div id="main" class="pjax"><div class="article wrap"><div class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList"><i class="ic i-home"></i> <span><a href="/">Home</a></span><i class="ic i-angle-right"></i> <span itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="/categories/Assembly/" itemprop="item" rel="index" title="In Assembly"><span itemprop="name">Assembly</span></a><meta itemprop="position" content="1"></span><i class="ic i-angle-right"></i> <span class="current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="/categories/Assembly/AssemblyLanguagePrimary/" itemprop="item" rel="index" title="In AssemblyLanguagePrimary"><span itemprop="name">AssemblyLanguagePrimary</span></a><meta itemprop="position" content="2"></span></div><article itemscope itemtype="http://schema.org/Article" class="post block" lang="zh-Hans"><link itemprop="mainEntityOfPage" href="https://xiaoliangcoder.github.io/Source/Assembly/AssemblyLanguageIntermediate/"><span hidden itemprop="author" itemscope itemtype="http://schema.org/Person"><meta itemprop="image" content="/images/avatar.jpg"><meta itemprop="name" content="XiaoLiang"><meta itemprop="description" content="笔记, 黑不溜qiu的抠脚大汉"></span><span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization"><meta itemprop="name" content="打爆你滴脑阔"></span><div class="body md" itemprop="articleBody"><h1 id="一-函数"><a class="anchor" href="#一-函数">#</a> 一、函数</h1><h2 id="1-函数基础"><a class="anchor" href="#1-函数基础">#</a>   1. 函数基础</h2><ul><li>每个函数都有独一无二的内存空间，和全局变量一样，函数代码直接保存在可执行文件中，在程序被进程加载时，函数就已经分配好了内存空间。</li><li>函数代码在代码区（_TEXT	SEGMENT）。</li><li>在结构体和类中，每个成员函数有且只有一个函数 “实例”（或叫共享函数），不论是对象的实例化，还是多态的继承等等。</li><li>代码示例：<pre><code class="language-C++">void Log()
+&#123;
+	printf(&quot;Hello Wolrd!\n&quot;);
+&#125;
+
+class LogClass
+&#123;
+public:
+	void Log()
+	&#123;
+		printf(&quot;Hello Wolrd!\n&quot;);
+	&#125;
+&#125;;
+
+int main(int argc, char* argv[])
+&#123;
+	/// ...
+
+	/// 调用全局函数Log
+		Log();
+	 call        00007FF61EC31492  
+	
+	/// 定义一个LogClass的局部变量，然后调用成员函数Log
+	/// 注意：比较成员函数Log和全局函数Log的地址，发现它们非常相近，都在全局代码区
+		LogClass L1;
+		L1.Log();
+	 lea         rcx,[rbp+4]  
+	 call        00007FF61EC3148D  
+
+
+		LogClass* pL2 = new LogClass();
+	 mov         ecx,1
+	/// C++可以重载operate new去控制内存的分配  
+	 call        operate new 
+	/// 内存的初始化，所以C++只能控制内存的分配，不能控制内存的初始化
+	 mov         qword ptr [rbp+0000000000000108h],rax  
+	 cmp         qword ptr [rbp+0000000000000108h],0  
+	 je          00007FF61EC31F65  
+	 mov         rax,qword ptr [rbp+0000000000000108h]  
+	 mov         qword ptr [rbp+0000000000000138h],rax  
+	 jmp         00007FF61EC31F70  
+	 mov         qword ptr [rbp+0000000000000138h],0  
+	 mov         rax,qword ptr [rbp+0000000000000138h]  
+	 mov         qword ptr [rbp+28h],rax 
+
+	/// 调用成员函数Log，注意看，这里调用的地址和上面的L1.Log调用地址一模一样！
+	/// 所以每个对象的实例共享函数，所以每个函数只有一块内存，并且在程序被进程加载时就被初始化
+		pL2-&gt;Log();
+	 mov         rcx,qword ptr [rbp+28h]  
+	 call        00007FF61EC3148D  
+
+		delete pL2;
+	 mov         rax,qword ptr [rbp+28h]  
+	 mov         qword ptr [rbp+0000000000000128h],rax  
+	 mov         edx,1  
+	 mov         rcx,qword ptr [rbp+0000000000000128h]  
+	/// operate delete释放内存
+	 call        operate delete  
+	 cmp         qword ptr [rbp+0000000000000128h],0  
+	 jne         00007FF61EC31FB7  
+	 mov         qword ptr [rbp+0000000000000138h],0  
+	 jmp         00007FF61EC31FCA  
+	 mov         qword ptr [rbp+28h],8123h  
+	 mov         rax,qword ptr [rbp+28h]  
+	 mov         qword ptr [rbp+0000000000000138h],rax  
+
+		return 0;
+	 xor         eax,eax  
+&#125;
+</code></pre></li></ul><h2 id="2-函数名"><a class="anchor" href="#2-函数名">#</a>   2. 函数名</h2><ul><li><p>函数名和指针一模一样？</p><ul><li>函数名代表函数执行代码的首地址</li><li>函数名指针不能被修改指向</li><li>所以函数名相当于一个 const 全局指针变量？</li><li>No，函数名其实是个常量！汇编语言中在使用函数名的地方会直接替换成函数首地址，直接编写进代码中。</li></ul></li><li><p>函数指针</p><ul><li>函数指针就是正常的指针变量，C++ 编译器检查其语法。</li></ul></li></ul><h2 id="3-函数的参数传递"><a class="anchor" href="#3-函数的参数传递">#</a>   3. 函数的参数传递</h2><ul><li>从右往左依次传递</li><li>传递前保存参数（调用函数代码）<ul><li>rcx（第一个参数）、rdx（第二个参数）、r8d（第三个参数）、r9d（第四个参数）、栈传参（后面所有参数）</li></ul></li><li>传递结束后（被调用函数代码）<ul><li>代码跳转到被调用函数后，寄存器保存的参数依次入栈保存！已经在栈中的参数不变。</li></ul></li><li>参数默认值：没有指定实参时，C++ 编译器会自动替换成默认值常量传参。</li></ul><h2 id="4-函数的返回值"><a class="anchor" href="#4-函数的返回值">#</a>   4. 函数的返回值</h2><ul><li>rax 返回值传参，清理该函数栈数据。</li></ul><h2 id="5-函数调用-栈"><a class="anchor" href="#5-函数调用-栈">#</a>   5. 函数调用 - 栈</h2><ul><li>汇编代码：call 函数地址</li><li>栈：保存函数体内局部临时变量。</li><li>栈原理：栈平衡<ul><li>图解：<br><img data-src="StackBalancing.png" alt="Stack Balancing"></li><li>1. 在调用函数 B 前 push rbp，<strong>将函数 A 的栈底地址等信息入栈保存下来</strong>。</li><li>2. 然后偏移（减去）rbp、rsp 到下一段未使用的栈空间，重新开始存储被调用函数 B 的局部变量。<ul><li>偏移量必须大于调用函数所使用的栈内存，否则会覆盖调用者的栈信息。</li><li>为什么是减去？（sub 偏移量）：栈底是高地址、栈顶是低地址。</li></ul></li><li>3. 在被调函数 B 返回后 pop rbp，<strong>出栈恢复调用函数 A 的栈底地址等信息</strong>。<ul><li>被调用函数的栈数据没有被及时清空，但是会被后入栈的数据覆盖！</li></ul></li></ul></li></ul><h2 id="6-代码示例"><a class="anchor" href="#6-代码示例">#</a>   6. 代码示例</h2><ul><li><p>Test01.h</p><pre><code class="language-C++">#pragma once
+
+/// 申明函数
+int Sum(int a, int b, int c = 0, int d = 0, int e = 0, int f = 0);
+</code></pre></li><li><p>Test01.cpp</p><pre><code class="language-C++">#include &quot;iostream&quot;
+using namespace std;
+
+/// 定义函数
+int Sum(int a, int b, int c/*= 0*/, int d/*= 0*/, int e/*= 0*/, int f/*= 0*/)
+&#123;
+	int sum = a + b + c + d + e + f;
+	return sum;
+&#125;
+</code></pre></li><li><p>Test02.cpp</p><pre><code class="language-C++">#include &quot;iostream&quot;
+#include &quot;Test01.h&quot;
+using namespace std;
+
+int main(int argc, char* argv[])
+&#123;
+	/// 使用函数
+	int iSum1 = Sum(1, 2);
+	int iSum2 = Sum(1, 2, 3, 4);
+	int iSum3 = Sum(1, 2, 3, 4, 5, 6);
+
+	printf(&quot;%d\n&quot;, iSum1);
+	printf(&quot;%d\n&quot;, iSum2);
+	printf(&quot;%d\n&quot;, iSum3);
+	return 0;
+&#125;
+</code></pre></li><li><p>汇编代码</p><pre><code class="language-C++">///////////////////////////// Sum /////////////////////////////
+int Sum(int a, int b, int c/*= 0*/, int d/*= 0*/, int e/*= 0*/, int f/*= 0*/)
+&#123;
+	/// 结束传参，代码执行指令已经跳转到函数内部
+	/// 将寄存器传参的参数保存在栈中
+	 mov         dword ptr [rsp+20h],r9d  
+	 mov         dword ptr [rsp+18h],r8d  
+	 mov         dword ptr [rsp+10h],edx  
+	 mov         dword ptr [rsp+8],ecx  
+	/// 栈平衡。记录被调用者栈底地址
+	 push        rbp  
+	 push        rdi  
+	/// rsp、rbp地址偏移，开始在未使用的栈内存记录该函数的栈数据
+	 sub         rsp,108h  
+	 lea         rbp,[rsp+20h]  
+	 lea         rcx,[00007FF794CB3029h]		;[__3C044B11_Test01@cpp (07FF794CB3029h)] 
+	 call        00007FF794CA13F7				;__CheckForDebuggerJustMyCode (07FF794CA13F7h)
+		int sum = a + b + c + d + e + f;
+	 mov         eax,dword ptr [rbp+0000000000000108h]  
+	 mov         ecx,dword ptr [rbp+0000000000000100h]  
+	 add         ecx,eax  
+	 mov         eax,ecx  
+	 add         eax,dword ptr [rbp+0000000000000110h]  
+	 add         eax,dword ptr [rbp+0000000000000118h]  
+	 add         eax,dword ptr [rbp+0000000000000120h]  
+	 add         eax,dword ptr [rbp+0000000000000128h]  
+	 mov         dword ptr [rbp+4],eax  
+		return sum;
+	/// 寄存器传递返回值
+	 mov         eax,dword ptr [rbp+4]  
+&#125;
+	 lea         rsp,[rbp+00000000000000E8h]  
+	 pop         rdi  
+	/// 栈平衡。恢复被调用者栈底内存地址
+	 pop         rbp  
+	/// 返回
+	 ret  
+
+
+///////////////////////////// main /////////////////////////////
+int main(int argc, char* argv[])
+&#123;
+	 mov         qword ptr [rsp+10h],rdx  
+	 mov         dword ptr [rsp+8],ecx  
+	 push        rbp  
+	 push        rdi  
+	 sub         rsp,158h  
+	 lea         rbp,[rsp+30h]  
+	 lea         rcx,[00007FF794CB3065h]		;[__7BA431C1_Test02@cpp (07FF794CB3065h)]
+	 call        00007FF794CA13F7				;__CheckForDebuggerJustMyCode (07FF794CA13F7h)
+		int iSum1 = Sum(1, 2);
+	/// 传参第三四五六个参数，默认值常量
+	 mov         dword ptr [rsp+28h],0  
+	 mov         dword ptr [rsp+20h],0  
+	 xor         r9d,r9d  
+	 xor         r8d,r8d  
+	/// 传参第一二个参数
+	 mov         edx,2  
+	 mov         ecx,1  
+	/// 调用函数
+	 call        00007FF794CA1465				;Sum函数首地址
+	/// 将返回值保存在栈中
+	 mov         dword ptr [rbp+4],eax  
+		int iSum2 = Sum(1, 2, 3, 4);
+	 mov         dword ptr [rsp+28h],0  
+	 mov         dword ptr [rsp+20h],0  
+	 mov         r9d,4  
+	 mov         r8d,3  
+	 mov         edx,2  
+	 mov         ecx,1  
+	 call        00007FF794CA1465  
+	 mov         dword ptr [rbp+24h],eax  
+		int iSum3 = Sum(1, 2, 3, 4, 5, 6);
+	 mov         dword ptr [rsp+28h],6  
+	 mov         dword ptr [rsp+20h],5  
+	 mov         r9d,4  
+	 mov         r8d,3  
+	 mov         edx,2  
+	 mov         ecx,1  
+	 call        00007FF794CA1465  
+	 mov         dword ptr [rbp+44h],eax  
+
+		printf(&quot;%d\n&quot;, iSum1);
+	 mov         edx,dword ptr [rbp+4]  
+	 lea         rcx,[00007FF794CAAD38h]  
+	 call        00007FF794CA11F4  
+		printf(&quot;%d\n&quot;, iSum2);
+	 mov         edx,dword ptr [rbp+24h]  
+	 lea         rcx,[00007FF794CAAD38h]  
+	 call        00007FF794CA11F4  
+		printf(&quot;%d\n&quot;, iSum3);
+	 mov         edx,dword ptr [rbp+44h]  
+	 lea         rcx,[00007FF794CAAD38h]  
+	 call        00007FF794CA11F4  
+		return 0;
+	 xor         eax,eax  
+&#125;
+	 lea         rsp,[rbp+0000000000000128h]  
+	 pop         rdi  
+	 pop         rbp  
+	 ret  
+</code></pre></li></ul><h1 id="二-面对对象-类和结构体"><a class="anchor" href="#二-面对对象-类和结构体">#</a> 二、面对对象 - 类和结构体</h1><h2 id="1-基础"><a class="anchor" href="#1-基础">#</a>   1. 基础</h2><ul><li>对象 = 属性（成员变量） + 方法（成员函数）</li><li>成员变量：（逻辑地址）对象首地址 self + 偏移<ul><li><strong>一块连续的内存，按照声明顺序存储对象的所有成员变量</strong>。</li><li>使用逻辑地址访问所有成员变量。</li></ul></li><li>成员函数：call + 函数地址<ul><li>对象首地址（self）传参是成员函数的第一个参数，被 C++ 编译器隐藏实现。</li><li>成员函数也是全局的（代码区）、所有对象共用的。C++ 编译器有语法限制成员函数不能像全局函数一样使用！</li><li>构造函数和析构函数也是成员函数。</li></ul></li></ul><h2 id="2-三大特性-封装"><a class="anchor" href="#2-三大特性-封装">#</a>   2. 三大特性 - 封装</h2><ul><li>C++: Public、Protected、Private</li><li>C++ 在编译阶段检查 Public、Protected、Private 权限，无汇编代码！</li></ul><h2 id="3-三大特性-继承"><a class="anchor" href="#3-三大特性-继承">#</a>   3. 三大特性 - 继承</h2><ul><li>成员变量的继承 - 内存<ul><li>成员变量的继承，在汇编语言中主要表现为内存的结构关系。</li><li>成员变量继承图<br><img data-src="MemoryInheritanceGraph.png" alt="Memory Inheritance Graph"></li><li>下文例子的继承图：<br><img data-src="MemoryInheritanceGraph_Instance.png" alt="Memory Inheritance Graph Instance"></li><li>所以：<ul><li><strong>基类首地址 等于 子类首地址！</strong></li><li>因为基类内存在前，所以用<strong>基类指针指向子类</strong>时不会出现各种错误（计算大小 sizeof、成员变量不对应...）！</li></ul></li></ul></li><li>成员函数继承？<ul><li>汇编语言没有函数继承的相关表现！C++ 成员函数的继承都是其编译器的语法检查。</li><li>在汇编中函数都是 call + 函数地址</li><li>所以在汇编语言中 C++ 的成员函数和全局函数、静态函数等没有什么区别。</li></ul></li></ul><h2 id="4-三大特性-多态虚函数virtual多态的实现原理"><a class="anchor" href="#4-三大特性-多态虚函数virtual多态的实现原理">#</a>   4. 三大特性 - 多态【虚函数（virtual）多态的实现原理】</h2><ul><li>在 C++ 中，使用关键字 virtual 声明的函数为<strong>虚函数</strong>。当类中定义有虚函数时，C++ 编译器会将该类中所有的虚函数首地址保存在一张地址表中，这张表叫<strong>虚表</strong>！<br>同时，编译器会在<strong>类首地址</strong>处添加一个隐藏的数据成员去指向虚标，该成员成为<strong>虚表指针</strong>。</li><li>图例：<br><img data-src="VirtualTable.png" alt="Virtual Table"></li><li>继承时，基类和派生类都各自有一张虚表。<br><img data-src="VirtualTableInheritance.png" alt="Virtual Table Inheritance"><ul><li>问：为什么没画箭头让类的虚表指针指向虚表？</li><li>答：<ul><li>当实例化一个基类对象时，该对象的虚表指针指向哪张虚表？毋庸置疑当然是基类的虚表！</li><li>当实例化一个派生类对象时呢？见下文 - 虚表指针的初始化和销毁。</li></ul></li></ul></li><li>虚表指针的初始化和销毁<ul><li>先执行基类构造函数，然后再执行派生类构造函数。</li><li>先执行派生类的析构函数，然后再执行基类的析构函数。</li><li>在构造 (析构) 函数中，设置虚表指针指向<strong>当前类</strong>的虚表！所以在基类构造 (析构) 函数中设置虚表指针指向基类的虚表，在派生类中被覆盖指向派生类的虚表。</li><li>问：<ul><li>1. 在基类构造函数中调用虚函数 (派生类 override)，会调用基类还是派生类的虚函数？</li><li>2. 在基类的析构函数中调用虚函数 (派生类 override)，会调用基类还是派生类的虚函数？</li></ul></li><li>答：<ul><li>1 和 2 都会调用基类的虚函数！<br>- 这样看来，多态在构造函数和析构函数中失效的，在这两个函数中调用的虚函数都是本类的虚函数实现。</li></ul></li></ul></li></ul><h2 id="5-例子"><a class="anchor" href="#5-例子">#</a>   5. 例子</h2><ul><li><p>C++ 代码</p><pre><code class="language-C++">#include &lt;iostream&gt;
+
+using namespace std;
+
+class People
+&#123;
+public:
+	People( )
+	&#123;
+		printf( &quot;--------------People Constructor---------------\n&quot; );
+		PrintClassName( );
+	&#125;;
+	virtual ~People()
+	&#123;
+		printf(&quot;--------------People Destructor---------------\n&quot; );
+		PrintClassName( );
+	&#125;;
+	virtual void PrintInfo( )
+	&#123;
+		SelfIntroduction();
+	&#125;;
+
+	virtual void PrintClassName( )
+	&#123;
+		printf(&quot;I am People!\n&quot; );
+	&#125;;
+
+	void SetName( string _strName )
+	&#123;
+		m_strName = _strName;
+	&#125;;
+
+protected:
+	virtual void SelfIntroduction( )
+	&#123;
+		printf( &quot;My name is %s, Man: %d, Age: %d, Height: %f \n&quot;, m_strName.c_str(), (int)m_bIsMan, m_iAge, m_fHeight );
+	&#125;;
+
+public:
+	string m_strName = &quot;People&quot;;
+	bool m_bIsMan = true;
+protected:
+	int m_iAge = 10;
+	float m_fHeight = 175.f;
+private:
+	int m_iTestPrivate = 100;
+&#125;;
+
+class Chinese : public People
+&#123;
+public:
+	Chinese( )
+	&#123;
+		printf( &quot;--------------Chinese Destructor---------------\n&quot; );
+		PrintClassName();
+	&#125;;
+	virtual ~Chinese( ) 
+	&#123;
+		printf( &quot;--------------Chinese Destructor---------------\n&quot; );
+		PrintClassName();
+	&#125;;
+	virtual void PrintInfo( ) override
+	&#123;
+		PrintClassName();
+		People::PrintInfo();
+	&#125;;
+
+	virtual void PrintClassName( ) override
+	&#123;
+		printf( &quot;I am Chinese\n&quot; );
+	&#125;;
+
+	void Init( int _iAge, float _fHeight, int _iChineseId, bool _bIsInland )
+	&#123;
+		m_iAge = _iAge;
+		m_fHeight = _fHeight;
+		m_iChineseId = _iChineseId;
+		m_bIsInland = _bIsInland;
+	&#125;;
+protected:
+	int m_iChineseId = 0;
+	bool m_bIsInland = true;
+
+&#125;;
+
+int main( )
+&#123;
+	Chinese* pChinese = new Chinese( );
+	pChinese-&gt;Init(20, 180, 100001, true);
+	pChinese-&gt;m_bIsMan = true;
+	pChinese-&gt;SetName( &quot;XiaoLiang&quot; );
+
+	/// 这一步检验虚表查询
+	pChinese-&gt;PrintInfo();
+
+	delete pChinese;
+
+	return 0;
+&#125;
+
+输出结果：
+--------------People Constructor---------------
+I am People!
+--------------Chinese Destructor---------------
+I am Chinese
+I am Chinese
+My name is XiaoLiang, Man: 1, Age: 20, Height: 180.000000
+--------------Chinese Destructor---------------
+I am Chinese
+--------------People Destructor---------------
+I am People!
+</code></pre></li><li><p>汇编</p><pre><code class="language-C++">//////////////////////// main函数 ////////////////////////
+int main( )
+&#123;
+ push        rbp  
+ push        rdi  
+ sub         rsp,1D8h  
+ lea         rbp,[rsp+30h]  
+ lea         rcx,[__69763273_Assembly@cpp (07FF6B4638029h)]  
+ call        __CheckForDebuggerJustMyCode (07FF6B46215BEh)
+
+	Chinese* pChinese = new Chinese( );
+ mov         ecx,48h  
+/// 使用operator new分配内存空间，并返回rax分配空间首地址
+ call        operator new (07FF6B462103Ch)		
+ mov         qword ptr [rbp+108h],rax
+/// 判断空间是否分配成功，空间地址是否有效			
+ cmp         qword ptr [rbp+108h],0				
+ je          main+4Bh (07FF6B46251DBh)
+/// 空间分配成功，传参对象首地址self  
+ mov         rcx,qword ptr [rbp+108h]	
+/// 先执行基类构造函数		
+ call        Chinese::Chinese (07FF6B4621456h)  
+/// 构造函数会返回对象首地址
+ mov         qword ptr [rbp+198h],rax			
+ jmp         main+56h (07FF6B46251E6h)
+/// 空间分配失败，将0放入rax返回 main+4Bh (07FF6B46251DBh)
+ mov         qword ptr [rbp+198h],0		
+/// 空间分配成功，将首地址放入rax返回 main+56h (07FF6B46251E6h)		
+ mov         rax,qword ptr [rbp+198h]			
+ mov         qword ptr [rbp+0E8h],rax  
+ mov         rax,qword ptr [rbp+0E8h]  
+ mov         qword ptr [pChinese],rax 
+
+	pChinese-&gt;Init(20, 180, 100001, true);
+/// 传参
+ mov         byte ptr [rsp+20h],1
+ mov         r9d,186A1h		
+ movss       xmm2,dword ptr [__real@43340000 (07FF6B462DC10h)] 
+ mov         edx,14h
+/// 传参self
+ mov         rcx,qword ptr [pChinese]	
+/// /// 调用成员函数Chinese::Init
+ call        Chinese::Init (07FF6B46211A4h)
+
+/// 首地址 + 偏移访问成员变量
+	pChinese-&gt;m_bIsMan = true;
+ mov         rax,qword ptr [pChinese]			
+ mov         byte ptr [rax+30h],1
+
+	pChinese-&gt;SetName( &quot;XiaoLiang&quot; );
+ lea         rax,[rbp+128h]  
+ mov         qword ptr [rbp+168h],rax  
+ lea         rdx,[string &quot;XiaoLiang&quot; (07FF6B462E3C0h)]  
+ mov         rcx,qword ptr [rbp+168h]  
+ call        std::basic_string&lt;char,std::char_traits&lt;char&gt;,std::allocator&lt;char&gt; &gt;::basic_string&lt;char,std::char_traits&lt;char&gt;,std::allocator&lt;char&gt; &gt; (07FF6B462128Fh)  
+ mov         qword ptr [rbp+198h],rax  
+ mov         rdx,qword ptr [rbp+198h]  
+ mov         rcx,qword ptr [pChinese]  
+ call        People::SetName (07FF6B4621555h) 
+
+//////////////////// 查虚表，执行虚函数 ////////////////////
+	pChinese-&gt;PrintInfo();
+/// 根据虚表指针取出虚表地址
+ mov         rax,qword ptr [pChinese]
+/// 得到虚表首地址rax  
+ mov         rax,qword ptr [rax]  
+ mov         rcx,qword ptr [pChinese]
+/// 虚函数Chinese::PrintInfo地址就存储在rax+8处
+/// 调用虚函数
+ call        qword ptr [rax+8]
+
+
+	delete pChinese;
+ mov         rax,qword ptr [pChinese]
+ mov         qword ptr [rbp+188h],rax  
+ cmp         qword ptr [rbp+188h],0 
+/// 判断空间是否有效 
+ je          main+114h (07FF6B46252A4h)
+/// 有效，查虚表执行最底层派生类的析构函数  
+ mov         rax,qword ptr [rbp+188h]  
+ mov         rax,qword ptr [rax]  
+ mov         edx,1  
+ mov         rcx,qword ptr [rbp+188h]  
+/// 调用最底层派生类的析构函数 Chinese::`scalar deleting destructor'
+/// operator delete也在该虚函数中
+ call        qword ptr [rax]  
+ mov         qword ptr [rbp+198h],rax  
+ jmp         main+11Fh (07FF6B46252AFh)  
+ mov         qword ptr [rbp+198h],0  
+
+	return 0;
+ xor         eax,eax  
+&#125;
+ lea         rsp,[rbp+1A8h]  
+ pop         rdi  
+ pop         rbp  
+ ret  
+
+
+
+
+//////////////////////// People构造函数和析构函数 ////////////////////////
+People( )
+ mov         qword ptr [rsp+8],rcx  
+ push        rbp  
+ push        rdi  
+ sub         rsp,0E8h  
+ lea         rbp,[rsp+20h]  
+ lea         rcx,[__69763273_Assembly@cpp (07FF6B4638029h)]  
+ call        __CheckForDebuggerJustMyCode (07FF6B46215BEh)  
+ mov         rax,qword ptr [this]  
+/// 设置虚表指针指向该类People的虚表
+ lea         rcx,[People::`vftable' (07FF6B462E248h)]
+ mov         qword ptr [rax],rcx  
+
+/// 构造函数中按照声明顺序依次初始化成员变量
+public:
+	string m_strName = &quot;People&quot;;
+ mov         rax,qword ptr [this]  
+ add         rax,8  
+ lea         rdx,[string &quot;People&quot; (07FF6B462E270h)]  
+ mov         rcx,rax  
+ call        std::basic_string&lt;char,std::char_traits&lt;char&gt;,std::allocator&lt;char&gt; &gt;::basic_string&lt;char,std::char_traits&lt;char&gt;,std::allocator&lt;char&gt; &gt; (07FF6B462128Fh)  
+ nop  
+	bool m_bIsMan = true;
+ mov         rax,qword ptr [this]  
+ mov         byte ptr [rax+30h],1  
+protected:
+	int m_iAge = 10;
+ mov         rax,qword ptr [this]  
+ mov         dword ptr [rax+34h],0Ah  
+	float m_fHeight = 175.f;
+ mov         rax,qword ptr [this]  
+ movss       xmm0,dword ptr [__real@432a0000 (07FF6B462E430h)]  
+ movss       dword ptr [rax+38h],xmm0  
+private:
+	int m_iTestPrivate = 100;
+ mov         rax,qword ptr [this]  
+ mov         dword ptr [rax+3Ch],64h  
+
+/// C++程序员编写的构造函数代码
+	&#123;
+		printf( &quot;--------------People Constructor---------------\n&quot; );
+ lea         rcx,[string &quot;--------------People Constructo@&quot;... (07FF6B462E278h)]  
+ call        printf (07FF6B46212C6h)
+
+/// 注意这里调用的是People::PrintClassName，直接调用：call + 函数地址 。
+/// 没有查虚表，所以多态在构造函数中失效
+		PrintClassName( );
+ mov         rcx,qword ptr [this]  
+ call        People::PrintClassName (07FF6B4621195h)  
+ nop  
+	&#125;;
+ mov         rax,qword ptr [this]  
+ lea         rsp,[rbp+0C8h]  
+ pop         rdi  
+ pop         rbp  
+ ret  
+
+
+virtual ~People()
+&#123;
+ mov         qword ptr [rsp+8],rcx  
+ push        rbp  
+ push        rdi  
+ sub         rsp,0E8h  
+ lea         rbp,[rsp+20h]  
+ lea         rcx,[__69763273_Assembly@cpp (07FF6B4638029h)]  
+ call        __CheckForDebuggerJustMyCode (07FF6B46215BEh)  
+ mov         rax,qword ptr [this] 
+///  设置虚表指针指向该类People的虚表
+ lea         rcx,[People::`vftable' (07FF6B462E248h)]  
+ mov         qword ptr [rax],rcx
+
+		printf(&quot;--------------People Destructor---------------\n&quot; );
+ lea         rcx,[string &quot;--------------People Destructor@&quot;... (07FF6B462E2B8h)]  
+ call        printf (07FF6B46212C6h) 
+
+/// 同上没有查虚表，所以多态在析构函数中失效
+		PrintClassName( );
+ mov         rcx,qword ptr [this]  
+ call        People::PrintClassName (07FF6B4621195h)  
+&#125;;
+ mov         rax,qword ptr [this]  
+ add         rax,8  
+ mov         rcx,rax  
+ call        std::basic_string&lt;char,std::char_traits&lt;char&gt;,std::allocator&lt;char&gt; &gt;::~basic_string&lt;char,std::char_traits&lt;char&gt;,std::allocator&lt;char&gt; &gt; (07FF6B462111Dh)  
+ nop  
+ lea         rsp,[rbp+0C8h]  
+ pop         rdi  
+ pop         rbp  
+ ret
+
+
+
+
+//////////////////////// Chinese构造函数和析构函数 ////////////////////////
+Chinese( )
+ mov         qword ptr [rsp+8],rcx  
+ push        rbp  
+ push        rdi  
+ sub         rsp,0E8h  
+ lea         rbp,[rsp+20h]  
+ lea         rcx,[__69763273_Assembly@cpp (07FF6B4638029h)]  
+ call        __CheckForDebuggerJustMyCode (07FF6B46215BEh)  
+///  设置虚表指针指向该类People的虚表
+ mov         rcx,qword ptr [this]  
+ call        People::People (07FF6B46212C1h)  
+
+ nop  
+ mov         rax,qword ptr [this]  
+ lea         rcx,[Chinese::`vftable' (07FF6B462E348h)]  
+ mov         qword ptr [rax],rcx  
+protected:
+/// 紧跟基类People成员变量的地址，依次初始化该类的成员变量，所以验证了上面的继承的内存结构图！
+	int m_iChineseId = 0;
+ mov         rax,qword ptr [this]  
+ mov         dword ptr [rax+40h],0  
+	bool m_bIsInland = true;
+ mov         rax,qword ptr [this]  
+ mov         byte ptr [rax+44h],1 
+ /// C++程序员编写的析构函数代码
+	&#123;
+		printf( &quot;--------------Chinese Destructor---------------\n&quot; );
+ lea         rcx,[string &quot;--------------Chinese Destructo@&quot;... (07FF6B462E370h)]  
+ call        printf (07FF6B46212C6h)
+
+/// 同上没有查虚表，所以多态在构造函数中失效
+		PrintClassName();
+ mov         rcx,qword ptr [this]  
+ call        Chinese::PrintClassName (07FF6B462121Ch)  
+ nop  
+	&#125;;
+ mov         rax,qword ptr [this]  
+ lea         rsp,[rbp+0C8h]  
+ pop         rdi  
+ pop         rbp  
+ ret 
+
+
+
+virtual ~Chinese( ) 
+&#123;
+ mov         qword ptr [rsp+8],rcx  
+ push        rbp  
+ push        rdi  
+ sub         rsp,0E8h  
+ lea         rbp,[rsp+20h]  
+ lea         rcx,[__69763273_Assembly@cpp (07FF6B4638029h)]  
+ call        __CheckForDebuggerJustMyCode (07FF6B46215BEh)  
+ mov         rax,qword ptr [this]  
+/// 将虚表指针指向该类Chinese的虚表
+ lea         rcx,[Chinese::`vftable' (07FF6B462E348h)]  
+ mov         qword ptr [rax],rcx  
+
+		printf( &quot;--------------Chinese Destructor---------------\n&quot; );
+ lea         rcx,[string &quot;--------------Chinese Destructo@&quot;... (07FF6B462E370h)]  
+ call        printf (07FF6B46212C6h) 
+
+/// 同上没有查虚表，所以多态在析构函数中失效
+		PrintClassName();
+ mov         rcx,qword ptr [this]  
+ call        Chinese::PrintClassName (07FF6B462121Ch)  
+&#125;;
+/// 调用基类People的析构函数
+ mov         rcx,qword ptr [this]  
+ call        People::~People (07FF6B46211C7h) 
+
+ nop  
+ lea         rsp,[rbp+0C8h]  
+ pop         rdi  
+ pop         rbp  
+ ret
+
+
+/// 这段汇编代码命令为 Chinese::`scalar deleting destructor'
+/// 这段虚函数（析构）代码完全是由C++编译器生成的！
+TestC++.exe!Chinese::`scalar deleting destructor'(unsigned int):
+ mov         dword ptr [rsp+10h],edx  
+ mov         qword ptr [rsp+8],rcx  
+ push        rbp  
+ push        rdi  
+ sub         rsp,0E8h  
+ lea         rbp,[rsp+20h]  
+ mov         rcx,qword ptr [this] 
+/// 调用最底层派生类析构函数 
+ call        Chinese::~Chinese (07FF70E721334h)  
+ mov         eax,dword ptr [rbp+0E8h]  
+ and         eax,1  
+ test        eax,eax  
+ je          Chinese::`scalar deleting destructor'+41h (07FF70E7237F1h)  
+ mov         edx,48h  
+ mov         rcx,qword ptr [this]  
+ call        operator delete (07FF70E7214D3h)  
+ mov         rax,qword ptr [this]  
+ lea         rsp,[rbp+0C8h]  
+ pop         rdi  
+ pop         rbp  
+ ret  
+
+</code></pre></li></ul><div class="tags"><a href="/tags/Assembly-Language/" rel="tag"><i class="ic i-tag"></i> Assembly Language</a></div></div><footer><div class="meta"><span class="item"><span class="icon"><i class="ic i-calendar-check"></i> </span><span class="text">Edited on</span> <time title="Modified: 2023-01-02 23:55:03" itemprop="dateModified" datetime="2023-01-02T23:55:03+08:00">2023-01-02</time></span></div><div class="reward"><button><i class="ic i-heartbeat"></i> Donate</button><p>Give me a cup of [coffee]~(￣▽￣)~*</p><div id="qr"><div><img data-src="/images/wechatpay.png" alt="XiaoLiang WeChat Pay"><p>WeChat Pay</p></div><div><img data-src="/images/alipay.png" alt="XiaoLiang Alipay"><p>Alipay</p></div></div></div><div id="copyright"><ul><li class="author"><strong>Post author: </strong>XiaoLiang <i class="ic i-at"><em>@</em></i>打爆你滴脑阔</li><li class="link"><strong>Post link: </strong><a href="https://xiaoliangcoder.github.io/Source/Assembly/AssemblyLanguageIntermediate/" title="C++反汇编语言 - 进阶">https://xiaoliangcoder.github.io/Source/Assembly/AssemblyLanguageIntermediate/</a></li><li class="license"><strong>Copyright Notice: </strong>All articles in this blog are licensed under <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</span> unless stating additionally.</li></ul></div></footer></article></div><div class="post-nav"><div class="item left"><a href="/Source/UnrealEngine/Input/InputFramework/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;tuapi.eees.cc&#x2F;api.php?category&#x3D;dongman&amp;type&#x3D;302" title="UE5 输入系统"><span class="type">Previous Post</span> <span class="category"><i class="ic i-flag"></i> Input</span><h3>UE5 输入系统</h3></a></div><div class="item right"><a href="/Source/Network/NetworkBase/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;api.likepoems.com&#x2F;img&#x2F;aliyun&#x2F;pc" title="网络游戏基础"><span class="type">Next Post</span> <span class="category"><i class="ic i-flag"></i> NetworkBase</span><h3>网络游戏基础</h3></a></div></div><div class="wrap" id="comments"></div></div><div id="sidebar"><div class="inner"><div class="panels"><div class="inner"><div class="contents panel pjax" data-title="Contents"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80-%E5%87%BD%E6%95%B0"><span class="toc-number">1.</span> <span class="toc-text">一、函数</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%87%BD%E6%95%B0%E5%9F%BA%E7%A1%80"><span class="toc-number">1.1.</span> <span class="toc-text">1. 函数基础</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%87%BD%E6%95%B0%E5%90%8D"><span class="toc-number">1.2.</span> <span class="toc-text">2. 函数名</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%87%BD%E6%95%B0%E7%9A%84%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92"><span class="toc-number">1.3.</span> <span class="toc-text">3. 函数的参数传递</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E5%87%BD%E6%95%B0%E7%9A%84%E8%BF%94%E5%9B%9E%E5%80%BC"><span class="toc-number">1.4.</span> <span class="toc-text">4. 函数的返回值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8-%E6%A0%88"><span class="toc-number">1.5.</span> <span class="toc-text">5. 函数调用 - 栈</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B"><span class="toc-number">1.6.</span> <span class="toc-text">6. 代码示例</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C-%E9%9D%A2%E5%AF%B9%E5%AF%B9%E8%B1%A1-%E7%B1%BB%E5%92%8C%E7%BB%93%E6%9E%84%E4%BD%93"><span class="toc-number">2.</span> <span class="toc-text">二、面对对象 - 类和结构体</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%9F%BA%E7%A1%80"><span class="toc-number">2.1.</span> <span class="toc-text">1. 基础</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E4%B8%89%E5%A4%A7%E7%89%B9%E6%80%A7-%E5%B0%81%E8%A3%85"><span class="toc-number">2.2.</span> <span class="toc-text">2. 三大特性 - 封装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E4%B8%89%E5%A4%A7%E7%89%B9%E6%80%A7-%E7%BB%A7%E6%89%BF"><span class="toc-number">2.3.</span> <span class="toc-text">3. 三大特性 - 继承</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E4%B8%89%E5%A4%A7%E7%89%B9%E6%80%A7-%E5%A4%9A%E6%80%81%E8%99%9A%E5%87%BD%E6%95%B0virtual%E5%A4%9A%E6%80%81%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86"><span class="toc-number">2.4.</span> <span class="toc-text">4. 三大特性 - 多态【虚函数（virtual）多态的实现原理】</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E4%BE%8B%E5%AD%90"><span class="toc-number">2.5.</span> <span class="toc-text">5. 例子</span></a></li></ol></li></ol></div><div class="related panel pjax" data-title="Related"><ul><li><a href="/Source/Assembly/AssemblyLanguagePrimary/" rel="bookmark" title="C++反汇编语言 - 入门">C++反汇编语言 - 入门</a></li><li class="active"><a href="/Source/Assembly/AssemblyLanguageIntermediate/" rel="bookmark" title="C++反汇编语言 - 进阶">C++反汇编语言 - 进阶</a></li></ul></div><div class="overview panel" data-title="Overview"><div class="author" itemprop="author" itemscope itemtype="http://schema.org/Person"><img class="image" itemprop="image" alt="XiaoLiang" data-src="/images/avatar.jpg"><p class="name" itemprop="name">XiaoLiang</p><div class="description" itemprop="description">黑不溜qiu的抠脚大汉</div></div><nav class="state"><div class="item posts"><a href="/archives/"><span class="count">12</span> <span class="name">posts</span></a></div><div class="item categories"><a href="/categories/"><span class="count">14</span> <span class="name">categories</span></a></div><div class="item tags"><a href="/tags/"><span class="count">9</span> <span class="name">tags</span></a></div></nav><div class="social"></div><ul class="menu"><li class="item"><a href="/" rel="section"><i class="ic i-home"></i>Home</a></li></ul></div></div></div><ul id="quick"><li class="prev pjax"><a href="/Source/UnrealEngine/Input/InputFramework/" rel="prev" title="Previous Post"><i class="ic i-chevron-left"></i></a></li><li class="up"><i class="ic i-arrow-up"></i></li><li class="down"><i class="ic i-arrow-down"></i></li><li class="next pjax"><a href="/Source/Network/NetworkBase/" rel="next" title="Next Post"><i class="ic i-chevron-right"></i></a></li><li class="percent"></li></ul></div></div><div class="dimmer"></div></div></main><footer id="footer"><div class="inner"><div class="widgets"><div class="rpost pjax"><h2>Random Posts</h2><ul><li class="item"><div class="breadcrumb"><a href="/categories/Assembly/" title="In Assembly">Assembly</a> <i class="ic i-angle-right"></i> <a href="/categories/Assembly/AssemblyLanguagePrimary/" title="In AssemblyLanguagePrimary">AssemblyLanguagePrimary</a></div><span><a href="/Source/Assembly/AssemblyLanguageIntermediate/" title="C++反汇编语言 - 进阶">C++反汇编语言 - 进阶</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/Assembly/" title="In Assembly">Assembly</a> <i class="ic i-angle-right"></i> <a href="/categories/Assembly/AssemblyLanguagePrimary/" title="In AssemblyLanguagePrimary">AssemblyLanguagePrimary</a></div><span><a href="/Source/Assembly/AssemblyLanguagePrimary/" title="C++反汇编语言 - 入门">C++反汇编语言 - 入门</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/Web/" title="In Web">Web</a> <i class="ic i-angle-right"></i> <a href="/categories/Web/Website/" title="In Website">Website</a> <i class="ic i-angle-right"></i> <a href="/categories/Web/Website/BuildGithubBlog/" title="In BuildGithubBlog">BuildGithubBlog</a></div><span><a href="/Source/Web/Website/BuildGithubBlog/" title="使用Github搭建网站">使用Github搭建网站</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/UnrealEngine/" title="In UnrealEngine">UnrealEngine</a> <i class="ic i-angle-right"></i> <a href="/categories/UnrealEngine/Editor/" title="In Editor">Editor</a> <i class="ic i-angle-right"></i> <a href="/categories/UnrealEngine/Editor/EditorExtend/" title="In EditorExtend">EditorExtend</a></div><span><a href="/Source/UnrealEngine/EditorExtend/EditorExtendMenuSource/" title="UE5 编辑器扩展（源码篇）">UE5 编辑器扩展（源码篇）</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/UnrealEngine/" title="In UnrealEngine">UnrealEngine</a> <i class="ic i-angle-right"></i> <a href="/categories/UnrealEngine/AutomationTest/" title="In AutomationTest">AutomationTest</a></div><span><a href="/Source/UnrealEngine/AutomationTest/AutomationTest/" title="UE5 自动化测测试">UE5 自动化测测试</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/UnrealEngine/" title="In UnrealEngine">UnrealEngine</a> <i class="ic i-angle-right"></i> <a href="/categories/UnrealEngine/Input/" title="In Input">Input</a></div><span><a href="/Source/UnrealEngine/Input/InputFramework/" title="UE5 输入系统">UE5 输入系统</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/UnrealEngine/" title="In UnrealEngine">UnrealEngine</a> <i class="ic i-angle-right"></i> <a href="/categories/UnrealEngine/Editor/" title="In Editor">Editor</a> <i class="ic i-angle-right"></i> <a href="/categories/UnrealEngine/Editor/EditorExtend/" title="In EditorExtend">EditorExtend</a></div><span><a href="/Source/UnrealEngine/EditorExtend/EditorExtendIntermediate/" title="UE5 编辑器扩展（进阶篇）">UE5 编辑器扩展（进阶篇）</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/Network/" title="In Network">Network</a> <i class="ic i-angle-right"></i> <a href="/categories/Network/UE5NetworkSourceBase/" title="In UE5NetworkSourceBase">UE5NetworkSourceBase</a></div><span><a href="/Source/Network/UE5NetworkSourceBase/" title="UE5 网络游戏基础">UE5 网络游戏基础</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/UnrealEngine/" title="In UnrealEngine">UnrealEngine</a> <i class="ic i-angle-right"></i> <a href="/categories/UnrealEngine/Editor/" title="In Editor">Editor</a> <i class="ic i-angle-right"></i> <a href="/categories/UnrealEngine/Editor/EditorExtend/" title="In EditorExtend">EditorExtend</a></div><span><a href="/Source/UnrealEngine/EditorExtend/EditorExtendPrimary/" title="UE5 编辑器扩展（入门篇）">UE5 编辑器扩展（入门篇）</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/Network/" title="In Network">Network</a> <i class="ic i-angle-right"></i> <a href="/categories/Network/NetworkBase/" title="In NetworkBase">NetworkBase</a></div><span><a href="/Source/Network/NetworkBase/" title="网络游戏基础">网络游戏基础</a></span></li></ul></div><div><h2>Recent Comments</h2><ul class="leancloud-recent-comment"></ul></div></div><div class="status"><div class="copyright">&copy; 2022 – <span itemprop="copyrightYear">2023</span> <span class="with-love"><i class="ic i-sakura rotate"></i> </span><span class="author" itemprop="copyrightHolder">XiaoLiang @ Senior Brother</span></div><div class="powered-by">Powered by <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & Theme.<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FtZWhpbWUvaGV4by10aGVtZS1zaG9rYQ==">Shoka</span></div></div></div></footer></div><script data-config type="text/javascript">var LOCAL={path:"Source/Assembly/AssemblyLanguageIntermediate/",favicon:{show:"（●´3｀●）Goooood",hide:"(´Д｀)Booooom"},search:{placeholder:"Search for Posts",empty:"We didn't find any results for the search: ${query}",stats:"${hits} results found in ${time} ms"},valine:!0,fancybox:!0,copyright:'Copied to clipboard successfully! <br> All articles in this blog are licensed under <i class="ic i-creative-commons"></i>BY-NC-SA.',ignores:[function(e){return e.includes("#")},function(e){return new RegExp(LOCAL.path+"$").test(e)}]}</script><script src="https://cdn.polyfill.io/v2/polyfill.js"></script><script src="//cdn.jsdelivr.net/combine/npm/pace-js@1.0.2/pace.min.js,npm/pjax@0.2.8/pjax.min.js,npm/whatwg-fetch@3.4.0/dist/fetch.umd.min.js,npm/animejs@3.2.0/lib/anime.min.js,npm/algoliasearch@4/dist/algoliasearch-lite.umd.js,npm/instantsearch.js@4/dist/instantsearch.production.min.js,npm/lozad@1/dist/lozad.min.js,npm/quicklink@2/dist/quicklink.umd.js"></script><script src="/js/app.js?v=0.2.5"></script></body></html><!-- rebuild by hrmmi -->
